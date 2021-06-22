@@ -17,11 +17,6 @@
   border-radius: 20px;
 }
 
-/* On mouse-over, add a deeper shadow */
-.chatSection:hover {
-  box-shadow: 0 8px 16px 0 var(--box-shadow);
-}
-
 .heading {
   font-size: 30px;
   font-family: "Fira Code";
@@ -116,8 +111,8 @@
 }
 
 .messagesSection {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .messagesContainer {

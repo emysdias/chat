@@ -11,11 +11,39 @@ const ChatFeed = () => {
     { text: DefaultMessages.first, isBot: true },
   ]);
   const [currentMessage, setCurrentMessage] = useState("");
+  const [timeMessage, setTimeMessage] = useState(0);
 
   const handleMessageSubmit = (message) => {
-    const data = {
-      message,
-    };
+    var responseData = {};
+
+    if (timeMessage === 0) {
+      responseData = {
+        text: `Que satisfação ${message}. Agora que sei seu nome, qual a cidade e estado que você mora?`,
+        isBot: true,
+      };
+    } else if (timeMessage === 1) {
+      responseData = {
+        text: DefaultMessages.third,
+        isBot: true,
+      };
+    } else if (timeMessage === 2) {
+      responseData = {
+        text: DefaultMessages.fourth,
+        isBot: true,
+      };
+    } else if (timeMessage === 3) {
+      responseData = {
+        text: DefaultMessages.fifth,
+        isBot: true,
+      };
+    } else {
+      responseData = {
+        text: DefaultMessages.reload,
+        isBot: true,
+      };
+    }
+    setResponses((responses) => [...responses, responseData]);
+    setTimeMessage((timeMessage) => timeMessage + 1);
   };
 
   const handleMessageChange = (event) => {
@@ -40,10 +68,11 @@ const ChatFeed = () => {
         <div className="messagesContainer">
           <Messages messages={responses} />
         </div>
-
         <div className="inputSection">
           <input
-            type="text"
+            id="name"
+            name="name"
+            type="email"
             onChange={handleMessageChange}
             value={currentMessage}
             placeholder="Digite algo..."
