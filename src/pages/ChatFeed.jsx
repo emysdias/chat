@@ -12,6 +12,7 @@ const ChatFeed = () => {
   ]);
   const [currentMessage, setCurrentMessage] = useState("");
   const [timeMessage, setTimeMessage] = useState(0);
+  const [inputType, setInputType] = useState("text");
 
   const handleMessageSubmit = (message) => {
     const messageChoice = {
@@ -21,15 +22,15 @@ const ChatFeed = () => {
       },
 
       1: {
-        text: DefaultMessages.third,
+        text: DefaultMessages.second,
         isBot: true,
       },
       2: {
-        text: DefaultMessages.fourth,
+        text: DefaultMessages.third[1],
         isBot: true,
       },
       3: {
-        text: DefaultMessages.fifth,
+        text: DefaultMessages.fourth,
         isBot: true,
       },
       4: {
@@ -42,6 +43,13 @@ const ChatFeed = () => {
       messageChoice[timeMessage] || [],
     ]);
 
+    if (messageChoice[timeMessage].text === DefaultMessages.second) {
+      setInputType("date");
+    } else if (messageChoice[timeMessage].text === DefaultMessages.third[1]) {
+      setInputType("email");
+    } else {
+      setInputType("text");
+    }
     if (timeMessage !== 4) {
       setTimeMessage((timeMessage) => timeMessage + 1);
     } else {
@@ -73,9 +81,9 @@ const ChatFeed = () => {
         </div>
         <div className="inputSection">
           <input
-            id="name"
-            name="name"
-            type="email"
+            id={inputType}
+            name={inputType}
+            type={inputType}
             onChange={handleMessageChange}
             value={currentMessage}
             placeholder="Digite algo..."
