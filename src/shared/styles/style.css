@@ -33,7 +33,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-top: 50px;
+  margin-top: 60px;
 }
 
 .messagesSection {
@@ -68,6 +68,11 @@
 }
 
 /* Message component styles here 👇 */
+.botContainerCard > img {
+  height: 65px;
+  width: 65px;
+}
+
 .botCard {
   width: 80%;
   border-bottom-right-radius: 30px 30px;
@@ -125,7 +130,6 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-top: 21px;
   }
 
   .userCard {

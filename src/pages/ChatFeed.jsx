@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import "../shared/styles/style.css";
 import Messages from "../components/Messages";
+// import api from "../services/api";
 import { DefaultMessages } from "../shared";
 import Icons from "../shared/assets";
 
@@ -43,11 +44,11 @@ const ChatFeed = () => {
         <div className="inputSection">
           <input
             type="text"
-            value={currentMessage}
-            onKeyDown={handleSubmit}
             onChange={handleMessageChange}
-            className="messageInputField"
+            value={currentMessage}
             placeholder="Digite algo..."
+            onKeyDown={handleSubmit}
+            className="messageInputField"
           />
           <div onClick={handleSubmit} className="inputImage">
             <img src={Icons.send} alt="send" />
