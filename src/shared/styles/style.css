@@ -1,0 +1,138 @@
+:root {
+  --pink: #fc4978;
+  --salmon: #ff7360;
+  --orange: #fa814b;
+  --dark-pink: #fc576d;
+  --black: #000000;
+  --white: #ffffff;
+  --box-shadow: rgba(0, 0, 0, 0.2);
+}
+
+.chatSection {
+  margin: auto;
+  width: 80%;
+  height: 80vh;
+  box-shadow: 0 4px 8px 0 var(--box-shadow);
+  transition: 0.3s;
+  border-radius: 20px;
+}
+
+/* On mouse-over, add a deeper shadow */
+.chatSection:hover {
+  box-shadow: 0 8px 16px 0 var(--box-shadow);
+}
+
+.heading {
+  font-size: 30px;
+  font-family: "Fira Code";
+  text-align: center;
+  margin: 30px;
+}
+
+.botContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 50px;
+}
+
+.messagesSection {
+  height: 90%;
+}
+
+.messageInputField {
+  margin-left: 10px;
+  font-size: 18px;
+  outline: none;
+  border-style: none;
+  width: 90%;
+}
+
+.inputSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.inputImage > img {
+  height: 25px;
+  width: 25px;
+  margin-right: 10px;
+}
+
+.messagesSection {
+  min-height: 70vh;
+  max-height: 70vh;
+  margin-top: 20px;
+  overflow-y: auto;
+}
+
+/* Message component styles here 👇 */
+.botCard {
+  width: 80%;
+  border-bottom-right-radius: 30px 30px;
+  border-top-right-radius: 30px 30px;
+  border-bottom-left-radius: 30px 30px;
+  background-color: var(--pink);
+  margin-left: 5px;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+
+.botCard > p {
+  padding-left: 16px;
+  padding-right: 10px;
+  font-family: "Montserrat";
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: 700;
+}
+
+.userCard {
+  width: 80%;
+  border-bottom-right-radius: 30px 30px;
+  border-top-left-radius: 30px 30px;
+  border-bottom-left-radius: 30px 30px;
+  float: right;
+  background-color: var(--orange);
+  margin-right: 5px;
+  color: var(--white);
+}
+
+.userCard > p {
+  padding-left: 16px;
+  padding-right: 10px;
+  font-family: "Montserrat";
+  font-weight: 700;
+}
+
+.messagesSection::-webkit-scrollbar {
+  display: none;
+}
+
+.messagesSection {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.messagesContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+@media only screen and (min-width: 992px) {
+  .inputSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 21px;
+  }
+
+  .userCard {
+    width: 50%;
+  }
+
+  .botCard {
+    width: 50%;
+  }
+}

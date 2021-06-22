@@ -1,4 +1,4 @@
-import ChatFeed from './pages/chatFeed';
+import ChatFeed from './pages/ChatFeed';
 
 function App() {
   return (
