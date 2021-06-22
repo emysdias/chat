@@ -14,36 +14,39 @@ const ChatFeed = () => {
   const [timeMessage, setTimeMessage] = useState(0);
 
   const handleMessageSubmit = (message) => {
-    var responseData = {};
-
-    if (timeMessage === 0) {
-      responseData = {
+    const messageChoice = {
+      0: {
         text: `Que satisfação ${message}. Agora que sei seu nome, qual a cidade e estado que você mora?`,
         isBot: true,
-      };
-    } else if (timeMessage === 1) {
-      responseData = {
+      },
+
+      1: {
         text: DefaultMessages.third,
         isBot: true,
-      };
-    } else if (timeMessage === 2) {
-      responseData = {
+      },
+      2: {
         text: DefaultMessages.fourth,
         isBot: true,
-      };
-    } else if (timeMessage === 3) {
-      responseData = {
+      },
+      3: {
         text: DefaultMessages.fifth,
         isBot: true,
-      };
-    } else {
-      responseData = {
+      },
+      4: {
         text: DefaultMessages.reload,
         isBot: true,
-      };
+      },
+    };
+    setResponses((responses) => [
+      ...responses,
+      messageChoice[timeMessage] || [],
+    ]);
+
+    if (timeMessage !== 4) {
+      setTimeMessage((timeMessage) => timeMessage + 1);
+    } else {
+      setTimeMessage(4);
     }
-    setResponses((responses) => [...responses, responseData]);
-    setTimeMessage((timeMessage) => timeMessage + 1);
   };
 
   const handleMessageChange = (event) => {
