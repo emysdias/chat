@@ -8,6 +8,12 @@
   --box-shadow: rgba(0, 0, 0, 0.2);
 }
 
+html,
+body {
+  background-color: var(--dark-pink);
+  font-family: "sans-serif";
+}
+
 .chatSection {
   margin: auto;
   width: 80%;
@@ -15,11 +21,11 @@
   box-shadow: 0 4px 8px 0 var(--box-shadow);
   transition: 0.3s;
   border-radius: 20px;
+  background-color: var(--white);
 }
 
 .heading {
   font-size: 30px;
-  font-family: "Fira Code";
   text-align: center;
   margin: 30px;
 }
@@ -82,7 +88,6 @@
 .botCard > p {
   padding-left: 16px;
   padding-right: 10px;
-  font-family: "Montserrat";
   padding-top: 10px;
   padding-bottom: 10px;
   font-weight: 700;
@@ -102,7 +107,6 @@
 .userCard > p {
   padding-left: 16px;
   padding-right: 10px;
-  font-family: "Montserrat";
   font-weight: 700;
 }
 
