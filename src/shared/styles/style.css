@@ -61,6 +61,11 @@ body {
   margin-right: 10px;
 }
 
+.inputButton {
+  border: none;
+  background-color: transparent;
+}
+
 .messagesSection {
   min-height: 70vh;
   max-height: 70vh;

@@ -5,7 +5,7 @@ import Messages from "../components/Messages";
 // import api from "../services/api";
 import { DefaultMessages } from "../shared";
 import Icons from "../shared/assets";
-import { useFormik } from "formik";
+import { Formik } from "formik";
 import * as Yup from "yup";
 
 const ChatFeed = () => {
@@ -16,28 +16,13 @@ const ChatFeed = () => {
   const [timeMessage, setTimeMessage] = useState(0);
   const [inputType, setInputType] = useState("text");
 
-  const formik = useFormik({
-    initialValues: {
-      name: "",
-      date: "",
-      text: "",
-      email: "",
-    },
-    validationSchema: Yup.object({
-      name: Yup.string()
-        .min(3, "Nome muito curto!")
-        .max(45, "Máxio 45 caracteres")
-        .required("Campo requerido"),
-      text: Yup.string()
-        .min(3, "Muito curto!")
-        .max(45, "Máxio 45 caracteres")
-        .required("Campo requerido"),
-      email: Yup.string().email("Email inválido").required("Campo requerido"),
-    }),
-    onSubmit: (values, actions) => {
-      alert(JSON.stringify(values, null, 2));
-      actions.resetForm();
-    },
+  const SignupSchema = Yup.object().shape({
+    text: Yup.string()
+      .min(3, "Muito curto!")
+      .max(45, "Máxio 45 caracteres")
+      .required("Campo requerido"),
+    date: Yup.date().required(),
+    email: Yup.string().email("Email inválido").required("Campo requerido"),
   });
 
   const handleMessageSubmit = (message) => {
@@ -81,7 +66,7 @@ const ChatFeed = () => {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmitMessage = (event) => {
     const message = {
       text: currentMessage,
       isBot: false,
@@ -90,36 +75,54 @@ const ChatFeed = () => {
     if (event.key === "Enter" || event.type === "click") {
       setResponses((responses) => [...responses, message]);
       handleMessageSubmit(message.text);
-      setCurrentMessage("");
     }
   };
 
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <div className="chatSection">
-        <div className="botContainer">
-          <div className="messagesContainer">
-            <Messages messages={responses} />
-          </div>
-          <div className="inputSection">
-            <input
-              type={inputType}
-              value={currentMessage}
-              onChange={(e) => setCurrentMessage(e.target.value)}
-              onKeyDown={handleSubmit}
-              placeholder="Digite Algo..."
-              className="messageInputField"
-            />
-            {formik.touched[inputType] && formik.errors[inputType] ? (
-              <div>{formik.errors[inputType]}</div>
-            ) : null}
-            <div onClick={handleSubmit} className="inputImage">
-              <img src={Icons.send} alt="send" />
+    <Formik
+      initialValues={{
+        text: "",
+        email: "",
+        date: "",
+      }}
+      validationSchema={SignupSchema}
+      onSubmit={(values) => {
+        console.log(values);
+      }}
+      validateOnBlur={false}
+    >
+      {({ errors, resetForm, values, handleChange }) => {
+        return (
+          <div className="chatSection">
+            <div className="botContainer">
+              <div className="messagesContainer">
+                <Messages messages={responses} />
+              </div>
+              <div className="inputSection">
+                <input
+                  type={inputType}
+                  name={inputType}
+                  value={values[inputType]}
+                  onChange={(e) => {
+                    handleChange(e);
+                    setCurrentMessage(e.target.value);
+                  }}
+                  onKeyDown={handleSubmitMessage}
+                  placeholder="Digite Algo..."
+                  className="messageInputField"
+                />
+                {errors[inputType] && <div>{errors[inputType]}</div>}
+                <button onClick={handleSubmitMessage} type="reset" className="inputButton">
+                  <div onClick={resetForm} className="inputImage">
+                    <img src={Icons.send} alt="send" />
+                  </div>
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </form>
+        );
+      }}
+    </Formik>
   );
 };
 
