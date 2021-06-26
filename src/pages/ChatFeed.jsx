@@ -19,7 +19,7 @@ const ChatFeed = () => {
   const SignupSchema = Yup.object().shape({
     text: Yup.string()
       .min(3, "Muito curto!")
-      .max(45, "Máxio 45 caracteres")
+      .max(45, "Máximo 45 caracteres")
       .required("Campo requerido"),
     date: Yup.date().required(),
     email: Yup.string().email("Email inválido").required("Campo requerido"),
@@ -74,7 +74,7 @@ const ChatFeed = () => {
 
     if (
       (event.key === "Enter" || event.type === "click") &&
-      currentMessage.length > 2
+      currentMessage.length > 2 && currentMessage.length < 46
     ) {
       if (errors.email !== "Email inválido") {
         setResponses((responses) => [...responses, message]);
