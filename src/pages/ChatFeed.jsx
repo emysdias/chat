@@ -21,7 +21,7 @@ const ChatFeed = () => {
       .min(3, "Muito curto!")
       .max(45, "Máximo 45 caracteres")
       .required("Campo requerido"),
-    date: Yup.date().required(),
+    date: Yup.date().max(new Date(), "Data inválida").required(),
     email: Yup.string().email("Email inválido").required("Campo requerido"),
   });
 
@@ -74,9 +74,13 @@ const ChatFeed = () => {
 
     if (
       (event.key === "Enter" || event.type === "click") &&
-      currentMessage.length > 2 && currentMessage.length < 46
+      currentMessage.length > 2 &&
+      currentMessage.length < 46
     ) {
-      if (errors.email !== "Email inválido") {
+      if (
+        errors.email !== "Email inválido" &&
+        errors.date !== "Data inválida"
+      ) {
         setResponses((responses) => [...responses, message]);
         handleMessageSubmit(message.text);
         setCurrentMessage("");
