@@ -66,17 +66,22 @@ const ChatFeed = () => {
     }
   };
 
-  const handleSubmitMessage = (event, { resetForm }) => {
+  const handleSubmitMessage = (event, { resetForm, errors }) => {
     const message = {
       text: currentMessage,
       isBot: false,
     };
 
-    if (event.key === "Enter" || event.type === "click") {
-      setResponses((responses) => [...responses, message]);
-      handleMessageSubmit(message.text);
-      setCurrentMessage("");
-      resetForm();
+    if (
+      (event.key === "Enter" || event.type === "click") &&
+      currentMessage.length > 2
+    ) {
+      if (errors.email !== "Email inválido") {
+        setResponses((responses) => [...responses, message]);
+        handleMessageSubmit(message.text);
+        setCurrentMessage("");
+        resetForm();
+      }
     }
   };
 
@@ -114,23 +119,26 @@ const ChatFeed = () => {
                     setCurrentMessage(e.target.value);
                   }}
                   onKeyPress={(e) => {
-                    handleSubmitMessage(e, { resetForm });
+                    handleSubmitMessage(e, { resetForm, errors });
                   }}
                   placeholder="Digite Algo..."
                   className="messageInputField"
                 />
-                {errors[inputType] && <div>{errors[inputType]}</div>}
-                <button
-                  onClick={(e) => {
-                    handleSubmitMessage(e, { resetForm });
-                  }}
-                  type="reset"
-                  className="inputButton"
-                >
-                  <div className="inputImage">
-                    <img src={Icons.send} alt="send" />
-                  </div>
-                </button>
+                {errors[inputType] && errors[inputType] ? (
+                  <div>{errors[inputType]}</div>
+                ) : (
+                  <button
+                    onClick={(e) => {
+                      handleSubmitMessage(e, { resetForm, errors });
+                    }}
+                    type="reset"
+                    className="inputButton"
+                  >
+                    <div className="inputImage">
+                      <img src={Icons.send} alt="send" />
+                    </div>
+                  </button>
+                )}
               </div>
             </div>
           </div>
