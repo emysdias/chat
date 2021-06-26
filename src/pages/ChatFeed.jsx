@@ -5,7 +5,7 @@ import Messages from "../components/Messages";
 // import api from "../services/api";
 import { DefaultMessages } from "../shared";
 import Icons from "../shared/assets";
-import { Formik } from "formik";
+import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
 
 const ChatFeed = () => {
@@ -66,7 +66,7 @@ const ChatFeed = () => {
     }
   };
 
-  const handleSubmitMessage = (event) => {
+  const handleSubmitMessage = (event, { resetForm }) => {
     const message = {
       text: currentMessage,
       isBot: false,
@@ -75,16 +75,22 @@ const ChatFeed = () => {
     if (event.key === "Enter" || event.type === "click") {
       setResponses((responses) => [...responses, message]);
       handleMessageSubmit(message.text);
+      setCurrentMessage("");
+      resetForm();
     }
   };
 
+  const formik = useFormik({
+    initialValues: {
+      text: "",
+      email: "",
+      date: "",
+    },
+  });
+
   return (
     <Formik
-      initialValues={{
-        text: "",
-        email: "",
-        date: "",
-      }}
+      initialValues={formik.initialValues}
       validationSchema={SignupSchema}
       onSubmit={(values) => {
         console.log(values);
@@ -107,13 +113,21 @@ const ChatFeed = () => {
                     handleChange(e);
                     setCurrentMessage(e.target.value);
                   }}
-                  onKeyDown={handleSubmitMessage}
+                  onKeyPress={(e) => {
+                    handleSubmitMessage(e, { resetForm });
+                  }}
                   placeholder="Digite Algo..."
                   className="messageInputField"
                 />
                 {errors[inputType] && <div>{errors[inputType]}</div>}
-                <button onClick={handleSubmitMessage} type="reset" className="inputButton">
-                  <div onClick={resetForm} className="inputImage">
+                <button
+                  onClick={(e) => {
+                    handleSubmitMessage(e, { resetForm });
+                  }}
+                  type="reset"
+                  className="inputButton"
+                >
+                  <div className="inputImage">
                     <img src={Icons.send} alt="send" />
                   </div>
                 </button>
