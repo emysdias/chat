@@ -71,6 +71,7 @@ body {
   max-height: 70vh;
   margin-top: 20px;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 /* Message component styles here 👇 */
@@ -129,6 +130,35 @@ body {
   flex-direction: column;
 }
 
+.w-6 {
+  width: 1.5em;
+  margin-left: 10px;
+}
+.h-6 {
+  height: 1.5em;
+}
+
+.ratingIcon {
+  cursor: pointer;
+}
+
+.stars {
+  display: flex;
+}
+
+.button {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.sendButton {
+  border: none;
+  height: 40px;
+  width: 80px;
+  background-color: var(--white);
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
 @media only screen and (min-width: 992px) {
   .inputSection {
     display: flex;

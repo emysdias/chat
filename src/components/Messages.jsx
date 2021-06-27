@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import Rating from "./Rating";
 import Icons from "../shared/assets";
 import "../shared/styles/style.css";
 
@@ -21,6 +22,7 @@ const Messages = ({ messages }) => {
                   <img src={Icons.spider} alt="spider" />
                   <div className="botCard">
                     <p>{message.text}</p>
+                    {message.rating && <Rating data={messages}/>}
                   </div>
                 </div>
               ) : (

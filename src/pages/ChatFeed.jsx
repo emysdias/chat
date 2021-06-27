@@ -1,27 +1,29 @@
 import React, { useState } from "react";
 
 import "../shared/styles/style.css";
-import Messages from "../components/Messages";
-// import api from "../services/api";
+import { Messages } from "../components";
 import { DefaultMessages } from "../shared";
 import Icons from "../shared/assets";
 import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
 
-const ChatFeed = () => {
+const ChatFeed = (test) => {
   const [responses, setResponses] = useState([
     { text: DefaultMessages.first, isBot: true },
   ]);
   const [currentMessage, setCurrentMessage] = useState("");
   const [timeMessage, setTimeMessage] = useState(0);
   const [inputType, setInputType] = useState("text");
+  const [showInput, setShowInput] = useState(false);
 
   const SignupSchema = Yup.object().shape({
     text: Yup.string()
       .min(3, "Muito curto!")
       .max(45, "Máximo 45 caracteres")
       .required("Campo requerido"),
-    date: Yup.date().max(new Date(), "Data inválida").required(),
+    date: Yup.date()
+      .max(new Date(), "Data inválida")
+      .required("Escolha a data"),
     email: Yup.string().email("Email inválido").required("Campo requerido"),
   });
 
@@ -42,6 +44,7 @@ const ChatFeed = () => {
       },
       3: {
         text: DefaultMessages.fourth,
+        rating: true,
         isBot: true,
       },
       4: {
@@ -61,8 +64,10 @@ const ChatFeed = () => {
     } else {
       setInputType("text");
     }
-    if (timeMessage !== 4) {
-      setTimeMessage((timeMessage) => timeMessage + 1);
+
+    setTimeMessage((timeMessage) => timeMessage + 1);
+    if (timeMessage === 3) {
+      setShowInput(true);
     }
   };
 
@@ -113,37 +118,39 @@ const ChatFeed = () => {
               <div className="messagesContainer">
                 <Messages messages={responses} />
               </div>
-              <div className="inputSection">
-                <input
-                  type={inputType}
-                  name={inputType}
-                  value={values[inputType]}
-                  onChange={(e) => {
-                    handleChange(e);
-                    setCurrentMessage(e.target.value);
-                  }}
-                  onKeyPress={(e) => {
-                    handleSubmitMessage(e, { resetForm, errors });
-                  }}
-                  placeholder="Digite Algo..."
-                  className="messageInputField"
-                />
-                {errors[inputType] && errors[inputType] ? (
-                  <div>{errors[inputType]}</div>
-                ) : (
-                  <button
-                    onClick={(e) => {
+              {showInput ? null : (
+                <div className="inputSection">
+                  <input
+                    type={inputType}
+                    name={inputType}
+                    value={values[inputType]}
+                    onChange={(e) => {
+                      handleChange(e);
+                      setCurrentMessage(e.target.value);
+                    }}
+                    onKeyPress={(e) => {
                       handleSubmitMessage(e, { resetForm, errors });
                     }}
-                    type="reset"
-                    className="inputButton"
-                  >
-                    <div className="inputImage">
-                      <img src={Icons.send} alt="send" />
-                    </div>
-                  </button>
-                )}
-              </div>
+                    placeholder="Digite Algo..."
+                    className="messageInputField"
+                  />
+                  {errors[inputType] && errors[inputType] ? (
+                    <div>{errors[inputType]}</div>
+                  ) : (
+                    <button
+                      onClick={(e) => {
+                        handleSubmitMessage(e, { resetForm, errors });
+                      }}
+                      type="reset"
+                      className="inputButton"
+                    >
+                      <div className="inputImage">
+                        <img src={Icons.send} alt="send" />
+                      </div>
+                    </button>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         );
