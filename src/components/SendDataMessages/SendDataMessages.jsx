@@ -1,8 +1,8 @@
 import React from "react";
-import api from "../services/api";
-import "../shared/styles/style.css";
+import api from "../../services/api";
+import "./SendDataMessages.css";
 
-const Button = (messages) => {
+const SendDataMessages = (messages) => {
   const sendMessages = async () => {
     const message = {
       name: messages.data.data[1].text,
@@ -13,8 +13,12 @@ const Button = (messages) => {
     };
     try {
       await api.post("/v1", message);
+      let resultString = "";
+      for (const [key, value] of Object.entries(message)) {
+        resultString += `${key}: ${value}\n`;
+      }
       setTimeout(function () {
-        alert("Obrigada!");
+        alert(resultString + "Dados salvos com sucesso!");
         window.location.reload();
       });
     } catch (err) {
@@ -30,4 +34,4 @@ const Button = (messages) => {
   );
 };
 
-export default Button;
+export default SendDataMessages;

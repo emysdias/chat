@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
-import Rating from "./Rating";
-import Icons from "../shared/assets";
-import "../shared/styles/style.css";
+import Rating from "../Rating/Rating";
+import Icons from "../../shared/assets";
+import "./Messages.css";
 
 const Messages = ({ messages }) => {
   const messagesEndRef = useRef(null);
@@ -16,13 +16,13 @@ const Messages = ({ messages }) => {
       {messages.map((message, index) => {
         return (
           <div className="messagesContainer" key={index}>
-            <div className="messageCard">
+            <div>
               {message.isBot ? (
                 <div className="botContainerCard">
                   <img src={Icons.spider} alt="spider" />
                   <div className="botCard">
                     <p>{message.text}</p>
-                    {message.rating && <Rating data={messages}/>}
+                    {message.rating && <Rating data={messages} />}
                   </div>
                 </div>
               ) : (

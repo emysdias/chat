@@ -1,0 +1,64 @@
+.messagesSection {
+  min-height: 70vh;
+  max-height: 70vh;
+  margin-top: 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 90%;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.messagesSection::-webkit-scrollbar {
+  display: none;
+}
+
+.botContainerCard > img {
+  height: 65px;
+  width: 65px;
+}
+
+.botCard {
+  width: 80%;
+  border-bottom-right-radius: 30px 30px;
+  border-top-right-radius: 30px 30px;
+  border-bottom-left-radius: 30px 30px;
+  background-color: var(--pink);
+  margin-left: 5px;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+
+.botCard > p {
+  padding-left: 16px;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: 700;
+}
+
+.userCard {
+  width: 80%;
+  border-bottom-right-radius: 30px 30px;
+  border-top-left-radius: 30px 30px;
+  border-bottom-left-radius: 30px 30px;
+  float: right;
+  background-color: var(--orange);
+  margin-right: 5px;
+  color: var(--white);
+}
+
+.userCard > p {
+  padding-left: 16px;
+  padding-right: 10px;
+  font-weight: 700;
+}
+
+@media only screen and (min-width: 992px) {
+  .botCard {
+    width: 50%;
+  }
+  .userCard {
+    width: 50%;
+  }
+}

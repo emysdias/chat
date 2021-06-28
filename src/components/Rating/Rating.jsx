@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
-import "../shared/styles/style.css";
-import Button from "./Button";
+import "./Rating.css";
+import SendDataMessages from "../SendDataMessages";
 
 const StarIcon = (props) => {
   const { fill = "none" } = props;
@@ -58,7 +58,7 @@ const Rating = (data) => {
     setRating(index);
   };
   return (
-    <div className="container">
+    <div>
       <div className="stars">
         {[1, 2, 3, 4, 5].map((index, item) => {
           return (
@@ -74,7 +74,9 @@ const Rating = (data) => {
           );
         })}
       </div>
-      <Button data={data} rating={rating} />
+      {rating && rating > 0 ? (
+        <SendDataMessages data={data} rating={rating} />
+      ) : <div className="buttonNull"></div>}
     </div>
   );
 };

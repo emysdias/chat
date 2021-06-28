@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-
-import "../shared/styles/style.css";
-import { Messages } from "../components";
-import { DefaultMessages } from "../shared";
-import Icons from "../shared/assets";
+import { Messages } from "../../components";
+import { DefaultMessages } from "../../shared";
+import Icons from "../../shared/assets";
 import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
+import "./ChatFeed.css";
 
-const ChatFeed = (test) => {
+const ChatFeed = () => {
   const [responses, setResponses] = useState([
     { text: DefaultMessages.first, isBot: true },
   ]);

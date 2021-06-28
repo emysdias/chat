@@ -1,0 +1,54 @@
+.chatSection {
+  margin: auto;
+  width: 80%;
+  height: 80vh;
+  box-shadow: 0 4px 8px 0 var(--box-shadow);
+  transition: 0.3s;
+  border-radius: 20px;
+  background-color: var(--white);
+}
+
+.botContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 60px;
+}
+
+.messagesContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.messageInputField {
+  margin-left: 10px;
+  font-size: 18px;
+  outline: none;
+  border-style: none;
+  width: 90%;
+}
+
+.inputButton {
+  border: none;
+  background-color: transparent;
+}
+
+.inputImage > img {
+  height: 25px;
+  width: 25px;
+  margin-right: 10px;
+}
+
+@media only screen and (min-width: 992px) {
+  .inputSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

@@ -1,9 +1,7 @@
-import ChatFeed from './pages/ChatFeed';
+import { ChatFeed } from "./pages";
 
 function App() {
-  return (
-    <ChatFeed/>
-  );
+  return <ChatFeed />;
 }
 
 export default App;
