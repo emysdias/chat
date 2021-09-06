@@ -3,7 +3,7 @@
 A site called mockAPI was used to make the requests, with this link you can GET and POST the database.
 
 ```bash
-https://60c9584d772a760017203569.mockapi.io/api
+https://60c9584d772a760017203569.mockapi.io/api/v1
 ```
 
 Site link with deploy: https://chatbot-emily.herokuapp.com/
